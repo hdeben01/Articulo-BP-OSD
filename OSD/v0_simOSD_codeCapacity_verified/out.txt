@@ -1,0 +1,48 @@
+
+E_fis = 0.1 ; E_log = 0.112 ( 112 times fail )
+        num epochs = 1000
+        uses BP 1000 times
+        uses OSD 724 times
+        OSD fails 627 times
+        average execution time 4.037429140090943 s
+        average osd time 5.572113336779136 s
+
+E_fis = 0.09 ; E_log = 0.0373 ( 373 times fail )
+        num epochs = 10000
+        uses BP 10000 times
+        uses OSD 5940 times
+        OSD fails 4879 times
+        average execution time 3.1577738758802414 s
+        average osd time 5.311108373953437 s
+
+E_fis = 0.08 ; E_log = 0.005 ( 50 times fail )
+        num epochs = 10000
+        uses BP 10000 times
+        uses OSD 4472 times
+        OSD fails 3492 times
+        average execution time 2.0950119896888735 s
+        average osd time 4.679185932565461 s
+
+E_fis = 0.07 ; E_log = 0.00068 ( 68 times fail )
+        num epochs = 100000
+        uses BP 100000 times
+        uses OSD 33732 times
+        OSD fails 25631 times
+        average execution time 1.597389870173931 s
+        average osd time 4.728949707201561 s
+
+E_fis = 0.06 ; E_log = 7.9e-05 ( 79 times fail )
+        num epochs = 1000000
+        uses BP 1000000 times
+        uses OSD 243352 times
+        OSD fails 181197 times
+        average execution time 1.189384052668333 s
+        average osd time 4.879153989663729 s
+
+E_fis = 0.05 ; E_log = 6.9e-06 ( 69 times fail )
+        num epochs = 10000000
+        uses BP 10000000 times
+        uses OSD 1636207 times
+        OSD fails 1207668 times
+        average execution time 0.8133967649570704 s
+        average osd time 4.960095961953134 s

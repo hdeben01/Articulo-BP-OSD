@@ -1,0 +1,31 @@
+[0.001 0.002 0.003 0.004 0.005]
+[3] [1, 2]
+[1, 2] [3]
+Code: 72
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00193118 0.00193118 0.0023296  ... 0.0010661  0.0010661  0.0010661 ]
+Physical error: 0.001
+Logical error BP+OSD (lib): 0.0 (0 logical errors) with average time 0.0005668838024139403 and max time 0.0076944828033447266
+Logical error BP+OSD      : 0.0 (0 logical errors) with average time 0.031729109048842935 and max time 12.861773490905762
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00385807 0.00385807 0.00465175 ... 0.00213106 0.00213106 0.00213106]
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.0005 (6 logical errors) with average time 0.0011586902141571037 and max time 0.009049177169799805
+Logical error BP+OSD      : 0.0005 (6 logical errors) with average time 0.1347639884948725 and max time 15.494747161865234
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00578065 0.00578065 0.00696646 ... 0.00319488 0.00319488 0.00319488]
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.002333333333333335 (28 logical errors) with average time 0.0017831490039825447 and max time 0.01515960693359375
+Logical error BP+OSD      : 0.002333333333333335 (28 logical errors) with average time 0.5714097282886521 and max time 16.462748289108276
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00769895 0.00769895 0.00927375 ... 0.00425756 0.00425756 0.00425756]
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.009000000000000006 (108 logical errors) with average time 0.003322090864181518 and max time 0.03048992156982422
+Logical error BP+OSD      : 0.009000000000000006 (108 logical errors) with average time 1.7942111313343132 and max time 16.046889305114746
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00961295 0.00961295 0.01157362 ... 0.00531911 0.00531911 0.00531911]

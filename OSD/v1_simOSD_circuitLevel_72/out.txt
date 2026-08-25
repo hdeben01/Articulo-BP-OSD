@@ -1,0 +1,278 @@
+[0.01 0.03 0.05]
+[3] [1, 2]
+[1, 2] [3]
+Code: 72
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.01911874 0.01911874 0.02296232 ... 0.01060978 0.01060978 0.01060978]
+ITERATION 0
+Physical error: 0.01
+Logical error BP+OSD (lib): 0.0001 with average time 2.6663780212402344e-06 and max time 0.026663780212402344
+Logical error BP+OSD      : 0.0001 with average time 0.000667939019203186 and max time 6.67939019203186
+ITERATION 100
+Physical error: 0.01
+Logical error BP+OSD (lib): 0.009899999999999996 with average time 0.00026073272228240973 and max time 0.07166767120361328
+Logical error BP+OSD      : 0.009899999999999996 with average time 0.06621298420429231 and max time 11.738890647888184
+ITERATION 200
+Physical error: 0.01
+Logical error BP+OSD (lib): 0.019799999999999936 with average time 0.0005161697864532473 and max time 0.07166767120361328
+Logical error BP+OSD      : 0.019799999999999936 with average time 0.12876075716018678 and max time 11.738890647888184
+ITERATION 300
+Physical error: 0.01
+Logical error BP+OSD (lib): 0.029499999999999877 with average time 0.0007784260272979738 and max time 0.07166767120361328
+Logical error BP+OSD      : 0.029499999999999877 with average time 0.19514982326030736 and max time 11.738890647888184
+^X^C^CTraceback (most recent call last):
+  File "/home/xs1/Desktop/Mauro/OSD_hls/v1_OSD_testAH/v1_OSD_testAH.py", line 294, in <module>
+    main()
+    ~~~~^^
+  File "/home/xs1/Desktop/Mauro/OSD_hls/v1_OSD_testAH/v1_OSD_testAH.py", line 223, in main
+    error_computed = _osd.decode(detectors[0], _bp.log_prob_ratios)
+KeyboardInterrupt
+
+(venv_py313) xs1@mach:~/Desktop/Mauro/OSD_hls/v1_OSD_testAH$ ^C
+(venv_py313) xs1@mach:~/Desktop/Mauro/OSD_hls/v1_OSD_testAH$ nano v1_OSD_testAH.py
+(venv_py313) xs1@mach:~/Desktop/Mauro/OSD_hls/v1_OSD_testAH$ python v1_OSD_testAH.py
+[0.001 0.002 0.003 0.004 0.005]
+[3] [1, 2]
+[1, 2] [3]
+Code: 72
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00193118 0.00193118 0.0023296  ... 0.0010661  0.0010661  0.0010661 ]
+ITERATION 0
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 4.947185516357422e-07 and max time 0.0004947185516357422
+Logical error BP+OSD      : 0 with average time 1.1920928955078125e-09 and max time 1.1920928955078125e-06
+ITERATION 100
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 5.573439598083498e-05 and max time 0.002161741256713867
+Logical error BP+OSD      : 0 with average time 3.242492675781252e-08 and max time 1.1920928955078125e-06
+ITERATION 200
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.00011907243728637703 and max time 0.0033304691314697266
+Logical error BP+OSD      : 0 with average time 6.341934204101567e-08 and max time 1.1920928955078125e-06
+ITERATION 300
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.00017247629165649425 and max time 0.0033304691314697266
+Logical error BP+OSD      : 0 with average time 9.346008300781257e-08 and max time 1.1920928955078125e-06
+ITERATION 400
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.00023540616035461442 and max time 0.0070035457611083984
+Logical error BP+OSD      : 0 with average time 1.2660026550292977e-07 and max time 1.1920928955078125e-06
+ITERATION 500
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.00028665590286254864 and max time 0.0070035457611083984
+Logical error BP+OSD      : 0 with average time 1.571178436279298e-07 and max time 1.1920928955078125e-06
+ITERATION 600
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.00034191465377807597 and max time 0.0070035457611083984
+Logical error BP+OSD      : 0 with average time 1.852512359619142e-07 and max time 1.1920928955078125e-06
+ITERATION 700
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.00039380192756652824 and max time 0.0070035457611083984
+Logical error BP+OSD      : 0 with average time 2.1386146545410173e-07 and max time 1.1920928955078125e-06
+ITERATION 800
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.0004564356803894045 and max time 0.0070035457611083984
+Logical error BP+OSD      : 0 with average time 2.4724006652832014e-07 and max time 1.1920928955078125e-06
+ITERATION 900
+Physical error: 0.001
+Logical error BP+OSD (lib): 0 with average time 0.0005151696205139163 and max time 0.0070035457611083984
+Logical error BP+OSD      : 0 with average time 2.8085708618163855e-07 and max time 1.430511474609375e-06
+**********************************************************************************************************************
+Physical error: 0.001
+Logical error BP+OSD (lib): 0.0 with average time 0.000583756685256959 and max time 0.0073888301849365234
+Logical error BP+OSD      : 0.0 with average time 3.132820129394491e-07 and max time 1.430511474609375e-06
+**********************************************************************************************************************
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00385807 0.00385807 0.00465175 ... 0.00213106 0.00213106 0.00213106]
+ITERATION 0
+Physical error: 0.002
+Logical error BP+OSD (lib): 0 with average time 8.068084716796875e-07 and max time 0.0008068084716796875
+Logical error BP+OSD      : 0 with average time 9.5367431640625e-10 and max time 9.5367431640625e-07
+ITERATION 100
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.001 with average time 0.00010267353057861326 and max time 0.007776021957397461
+Logical error BP+OSD      : 0.001 with average time 0.016534383773803698 and max time 11.088076829910278
+ITERATION 200
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.002 with average time 0.0002138161659240722 and max time 0.007776021957397461
+Logical error BP+OSD      : 0.002 with average time 0.028181248664855985 and max time 11.646836042404175
+ITERATION 300
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.003 with average time 0.0003230271339416504 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.003 with average time 0.03818016505241387 and max time 11.646836042404175
+ITERATION 400
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.003 with average time 0.0004352750778198244 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.003 with average time 0.04895652961730933 and max time 11.646836042404175
+ITERATION 500
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.004 with average time 0.0005407910346984862 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.004 with average time 0.06988651800155599 and max time 11.646836042404175
+ITERATION 600
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.004 with average time 0.0006209945678710937 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.004 with average time 0.0698865442275994 and max time 11.646836042404175
+ITERATION 700
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.004 with average time 0.0007168836593627931 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.004 with average time 0.06988657093047998 and max time 11.646836042404175
+ITERATION 800
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.005 with average time 0.0008328125476837161 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.005 with average time 0.07487325882911558 and max time 11.646836042404175
+ITERATION 900
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.007 with average time 0.0009364402294158938 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.007 with average time 0.08727149176597446 and max time 12.398194789886475
+**********************************************************************************************************************
+Physical error: 0.002
+Logical error BP+OSD (lib): 0.0006666666666666666 with average time 0.0010424110889434826 and max time 0.008120059967041016
+Logical error BP+OSD      : 0.0006666666666666666 with average time 0.09930062317848032 and max time 12.398194789886475
+**********************************************************************************************************************
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00578065 0.00578065 0.00696646 ... 0.00319488 0.00319488 0.00319488]
+ITERATION 0
+Physical error: 0.003
+Logical error BP+OSD (lib): 0 with average time 1.7621517181396484e-06 and max time 0.0017621517181396484
+Logical error BP+OSD      : 0 with average time 1.1920928955078125e-09 and max time 1.1920928955078125e-06
+ITERATION 100
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.002 with average time 0.00018821573257446294 and max time 0.008818626403808594
+Logical error BP+OSD      : 0.002 with average time 0.030722385406494142 and max time 10.971530675888062
+ITERATION 200
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.007 with average time 0.00038091874122619604 and max time 0.00930476188659668
+Logical error BP+OSD      : 0.007 with average time 0.06936438059806811 and max time 10.971530675888062
+ITERATION 300
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.009000000000000001 with average time 0.0005651776790618896 and max time 0.00930476188659668
+Logical error BP+OSD      : 0.009000000000000001 with average time 0.09783289432525598 and max time 12.377054929733276
+ITERATION 400
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.015000000000000006 with average time 0.0007863547801971434 and max time 0.00930476188659668
+Logical error BP+OSD      : 0.015000000000000006 with average time 0.1866040902137755 and max time 12.377054929733276
+ITERATION 500
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.01900000000000001 with average time 0.0010055255889892581 and max time 0.009319305419921875
+Logical error BP+OSD      : 0.01900000000000001 with average time 0.28345304536819466 and max time 12.535077571868896
+ITERATION 600
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.02100000000000001 with average time 0.0012112269401550301 and max time 0.009463071823120117
+Logical error BP+OSD      : 0.02100000000000001 with average time 0.3213177657127377 and max time 12.535077571868896
+ITERATION 700
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.026000000000000016 with average time 0.0013973932266235355 and max time 0.010024309158325195
+Logical error BP+OSD      : 0.026000000000000016 with average time 0.37905584502220097 and max time 12.535077571868896
+ITERATION 800
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.03200000000000002 with average time 0.0016091558933258058 and max time 0.010024309158325195
+Logical error BP+OSD      : 0.03200000000000002 with average time 0.44773016119003206 and max time 12.535077571868896
+ITERATION 900
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.035000000000000024 with average time 0.0017832269668579105 and max time 0.010024309158325195
+Logical error BP+OSD      : 0.035000000000000024 with average time 0.47740029335021844 and max time 12.535077571868896
+**********************************************************************************************************************
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.0032500000000000025 with average time 0.0019764099121093747 and max time 0.010024309158325195
+Logical error BP+OSD      : 0.0032500000000000025 with average time 0.5115038471221913 and max time 12.535077571868896
+**********************************************************************************************************************
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00769895 0.00769895 0.00927375 ... 0.00425756 0.00425756 0.00425756]
+ITERATION 0
+Physical error: 0.004
+Logical error BP+OSD (lib): 0 with average time 1.2412071228027345e-06 and max time 0.0012412071228027344
+Logical error BP+OSD      : 0 with average time 1.9073486328125e-09 and max time 1.9073486328125e-06
+ITERATION 100
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.005 with average time 0.00028829669952392577 and max time 0.010573387145996094
+Logical error BP+OSD      : 0.005 with average time 0.13816311359405517 and max time 13.007928371429443
+ITERATION 200
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.02000000000000001 with average time 0.0005973060131072998 and max time 0.01567554473876953
+Logical error BP+OSD      : 0.02000000000000001 with average time 0.2697027730941773 and max time 13.007928371429443
+ITERATION 300
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.03300000000000002 with average time 0.0009454233646392825 and max time 0.01567554473876953
+Logical error BP+OSD      : 0.03300000000000002 with average time 0.5026162137985231 and max time 15.949668169021606
+ITERATION 400
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.046000000000000034 with average time 0.001303024291992187 and max time 0.01567554473876953
+Logical error BP+OSD      : 0.046000000000000034 with average time 0.6833775336742406 and max time 15.949668169021606
+ITERATION 500
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.05400000000000004 with average time 0.0016135263442993166 and max time 0.01567554473876953
+Logical error BP+OSD      : 0.05400000000000004 with average time 0.8173633005619062 and max time 15.949668169021606
+ITERATION 600
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.06300000000000004 with average time 0.0019006180763244623 and max time 0.01567554473876953
+Logical error BP+OSD      : 0.06300000000000004 with average time 0.9901022193431878 and max time 15.949668169021606
+ITERATION 700
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.07300000000000005 with average time 0.0022004449367523204 and max time 0.017118453979492188
+Logical error BP+OSD      : 0.07300000000000005 with average time 1.1318258013725322 and max time 15.949668169021606
+ITERATION 800
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.08500000000000006 with average time 0.0025144543647766145 and max time 0.017118453979492188
+Logical error BP+OSD      : 0.08500000000000006 with average time 1.2850176720619264 and max time 15.949668169021606
+ITERATION 900
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.09800000000000007 with average time 0.002837114572525027 and max time 0.017118453979492188
+Logical error BP+OSD      : 0.09800000000000007 with average time 1.4356102776527495 and max time 15.949668169021606
+**********************************************************************************************************************
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.009333333333333341 with average time 0.003180072307586672 and max time 0.021692514419555664
+Logical error BP+OSD      : 0.009333333333333341 with average time 1.5839881095886341 and max time 15.949668169021606
+**********************************************************************************************************************
+-------------------------------------------------
+parity check matrix (468, 4392)
+[0.00961295 0.00961295 0.01157362 ... 0.00531911 0.00531911 0.00531911]
+ITERATION 0
+Physical error: 0.005
+Logical error BP+OSD (lib): 0 with average time 3.6344528198242187e-06 and max time 0.0036344528198242188
+Logical error BP+OSD      : 0 with average time 7.152557373046875e-10 and max time 7.152557373046875e-07
+ITERATION 100
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.025000000000000015 with average time 0.0005180943012237547 and max time 0.018039226531982422
+Logical error BP+OSD      : 0.025000000000000015 with average time 0.2831058599948883 and max time 11.66990613937378
+ITERATION 200
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.047000000000000035 with average time 0.0010270953178405766 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.047000000000000035 with average time 0.529345942974091 and max time 11.66990613937378
+ITERATION 300
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.07600000000000005 with average time 0.0015662758350372308 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.07600000000000005 with average time 0.8279161469936379 and max time 13.04994010925293
+ITERATION 400
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.10300000000000008 with average time 0.0021023364067077623 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.10300000000000008 with average time 1.137114583253862 and max time 14.265307426452637
+ITERATION 500
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.1210000000000001 with average time 0.0025912923812866214 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.1210000000000001 with average time 1.3708375566005724 and max time 14.265307426452637
+ITERATION 600
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.1430000000000001 with average time 0.0031128015518188485 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.1430000000000001 with average time 1.641463756561282 and max time 14.265307426452637
+ITERATION 700
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.17100000000000012 with average time 0.003641946554183959 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.17100000000000012 with average time 1.915568100452425 and max time 14.265307426452637
+ITERATION 800
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.19700000000000015 with average time 0.004215790033340451 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.19700000000000015 with average time 2.272205850839621 and max time 14.265307426452637
+ITERATION 900
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.22000000000000017 with average time 0.0047654917240142775 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.22000000000000017 with average time 2.597735365629208 and max time 14.265307426452637
+**********************************************************************************************************************
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.020750000000000015 with average time 0.005297289133071893 and max time 0.02350020408630371
+Logical error BP+OSD      : 0.020750000000000015 with average time 2.886400956869145 and max time 14.265307426452637
+**********************************************************************************************************************
