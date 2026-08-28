@@ -1,0 +1,27 @@
+[
+  {
+    "directory": "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_hls",
+    "arguments": [
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\win64\\tools\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\AMDDesignTools\\2025.2\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls",
+      "-hls-syn-headers-dir=C:\\AMDDesignTools\\2025.2\\Vitis\\common\\technology\\autopilot",
+      "-fhlstoplevel=void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M])",
+      "-c",
+      "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD.cpp"
+    ],
+    "file": "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD.cpp"
+  },
+  {
+    "directory": "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_hls",
+    "arguments": [
+      "C:\\AMDDesignTools\\2025.2\\Vitis\\win64\\tools\\vcxx\\libexec\\clang++.exe",
+      "--sysroot=C:\\AMDDesignTools\\2025.2\\Vitis\\tps\\mingw\\10.0.0\\win64.o\\nt",
+      "-fhls-tb",
+      "-hls-sim-headers-dir=C:\\AMDDesignTools\\2025.2\\Vitis\\include",
+      "-c",
+      "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_tb.cpp"
+    ],
+    "file": "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_tb.cpp"
+  }
+]

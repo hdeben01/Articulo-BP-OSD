@@ -1,0 +1,14 @@
+{
+  "name": "OSD_hls",
+  "type": "HLS",
+  "configuration": {
+    "componentType": "HLS",
+    "configFiles": [
+      "hls_config.cfg"
+    ],
+    "work_dir": "void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M])"
+  },
+  "useSysrootToolchain": false,
+  "template": "empty_hls_component",
+  "templateFlow": "VITIS"
+}

@@ -1,0 +1,3 @@
+relativeroot=C:/Users/mauro/Articulo-BP-OSD/hls/OSD_hls
+original_argv=--mode hls --csim --config C:\Users\mauro\Articulo-BP-OSD\hls\OSD_hls\hls_config.cfg --work_dir void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M]) 
+

@@ -1,0 +1,82 @@
+<ENTRY>
+{
+ "thisFile": "C:/Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_hls\\void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M])\\void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M]).hlsrun_csim_summary",
+ "connectId": "",
+ "serverToken": "",
+ "timestamp": "0"
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_CmdStep",
+ "dateTimestamp": "08/28/26 17:12:31",
+ "timestampMillis": "1787929951778",
+ "buildStep": {
+  "cmdId": "9ef0e0ba-5746-4678-91e5-d339c94e5d7c",
+  "name": "vitis-run",
+  "logFile": "C:/Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_hls\\void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M])\\logs\\void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M]).steps.log",
+  "commandLine": "C:/AMDDesignTools/2025.2/Vitis/bin/unwrapped/win64.o/vitis-run.exe  --mode hls --csim --config C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_hls\\hls_config.cfg --work_dir void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M]) ",
+  "args": [
+   "--mode",
+   "hls",
+   "--csim",
+   "--config",
+   "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_hls\\hls_config.cfg",
+   "--work_dir",
+   "void decode(bit_t synd_in[N], value_t prob_ini_in[M], bit_t sol[M])"
+  ],
+  "iniFiles": [],
+  "cwd": "C:\\Users\\mauro\\Articulo-BP-OSD\\hls\\OSD_hls"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/28/26 17:12:31",
+ "timestampMillis": "1787929951778",
+ "status": {
+  "cmdId": "9ef0e0ba-5746-4678-91e5-d339c94e5d7c",
+  "state": "CS_RUNNING"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Status",
+ "dateTimestamp": "08/28/26 17:12:37",
+ "timestampMillis": "1787929957280",
+ "status": {
+  "cmdId": "9ef0e0ba-5746-4678-91e5-d339c94e5d7c",
+  "state": "CS_FAILED"
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/28/26 17:12:37",
+ "timestampMillis": "1787929957281",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "HTML",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
+<ENTRY>
+{
+ "type": "ET_Report",
+ "dateTimestamp": "08/28/26 17:12:37",
+ "timestampMillis": "1787929957281",
+ "report": {
+  "path": "",
+  "name": "",
+  "fileType": "BINARY_PROTOBUF",
+  "reportType": "GLOBAL_RULECHECK_GUIDANCE",
+  "cmdId": ""
+ }
+}
+</ENTRY>
