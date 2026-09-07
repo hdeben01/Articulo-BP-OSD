@@ -42,8 +42,8 @@ PYBIND11_MODULE(OSD_decoder, m) {
             return decoder.release();
         }), py::arg("H_cod"))
 
-        .def("decode", [](osd_decoder& self, 
-                          py::array_t<int, py::array::c_style | py::array::forcecast> synd_in, 
+        .def("decode", [](osd_decoder& self,
+                          py::array_t<int, py::array::c_style | py::array::forcecast> synd_in,
                           py::array_t<double, py::array::c_style | py::array::forcecast> prob_ini_in) {
 
             auto synd_buf = synd_in.request();
@@ -69,4 +69,57 @@ PYBIND11_MODULE(OSD_decoder, m) {
 
             return result;
         }, py::arg("synd"), py::arg("prob_ini"));
-}*/
+
+
+
+
+
+
+        // ***** OSD OPTIMIZADO *****
+
+        py::class_<osd_decoder_opt>(m, "OSD_decoder_opt")
+        .def(py::init([](py::array_t<int, py::array::c_style | py::array::forcecast> H_cod_in) {
+            auto buf = H_cod_in.request();
+            int* H_ptr = static_cast<int*>(buf.ptr);
+
+            // Instanciación directa en Heap para no agotar el Stack
+            auto decoder = std::make_unique<osd_decoder_opt>();
+
+            for (int i = 0; i < M; i++) {
+                for (int j = 0; j < N; j++) {
+                    decoder->H_T_cod[i][j] = H_ptr[i * N + j];
+                }
+            }
+
+            return decoder.release();
+        }), py::arg("H_cod"))
+
+        .def("decode", [](osd_decoder_opt& self,
+                          py::array_t<int, py::array::c_style | py::array::forcecast> synd_in,
+                          py::array_t<double, py::array::c_style | py::array::forcecast> prob_ini_in) {
+
+            auto synd_buf = synd_in.request();
+            int* synd_ptr = static_cast<int*>(synd_buf.ptr);
+
+            auto prob_buf = prob_ini_in.request();
+            double* prob_ptr = static_cast<double*>(prob_buf.ptr);
+
+            int synd_c[N];
+            double prob_ini_c[M];
+            int sol_c[M] = { 0 };
+
+            std::copy(synd_ptr, synd_ptr + N, synd_c);
+            std::copy(prob_ptr, prob_ptr + M, prob_ini_c);
+
+            self.decode(synd_c, prob_ini_c, sol_c);
+
+            py::array_t<int> result(M);
+            auto res_buf = result.request();
+            int* res_ptr = static_cast<int*>(res_buf.ptr);
+
+            std::copy(sol_c, sol_c + M, res_ptr);
+
+            return result;
+        }, py::arg("synd"), py::arg("prob_ini"));
+}
+*/
