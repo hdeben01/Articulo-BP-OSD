@@ -1,23 +1,34 @@
 from packaging.version import Version
 from ldpc import __version__ as ldpc_version
 
-from ldpc import BpDecoder, BpOsdDecoder 
+from ldpc import BpDecoder  
+from ldpc.bplsd_decoder import BpLsdDecoder
+from ldpc import BpOsdDecoder  
 import matplotlib.pyplot as plt
 
 import sys
 import os
 
+# Añadir la carpeta padre al path
+
+# Obtener la ruta absoluta del directorio actual (src/)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# Subir un nivel para llegar a la carpeta donde está el .so
+parent_dir = os.path.dirname(current_dir)
+
+# Añadir la carpeta del .so al path de Python
+sys.path.append(parent_dir)
+
 from wrapper_csc import compute_min_sum_wrapper,SparseMatrixWrapper,init_sparse_matrix_t, init_sparse_matrix_from_csc
-
-
-from OSD_lib import OSD_decoder
 
 import numpy as np  
 import time  
 from scipy import sparse 
-
 from dem_to_matrices import detector_error_model_to_check_matrices
 from IBM_STIM import create_bivariate_bicycle_codes, build_circuit, select_configuration, save_sparse_matrices,dem_to_check_matrices
+
+
 
 
 
@@ -26,7 +37,7 @@ def main():
     show_prints = False
     
     # List of codes to test in this example is the [[72, 12 ,6]] from https://www.nature.com/articles/s41586-024-07107-7
-    codesConfig = ["72"]
+    codesConfig = ["144"]
     
     # Number of Monte Carlo trials for physical error rates
     exp = 3
@@ -38,14 +49,14 @@ def main():
     
     print(ps)
     
-    # Logical error rates for BPOSD_lib and BPOSD decoders
-    PlsBPOSD_lib = {}  
+    # Logical error rates for BP and BPOSD decoders
+    PlsBP = {}  
     PlsBPOSD = {}  
     
 
-    # Execution times for BPOSD_lib and BPOSD decoders
+    # Execution times for BP, BP+OSD
     times_BPOSD = {}  
-    times_BPOSD_lib = {} 
+    times_BP = {} 
 
     #q_reliability = 0.0
     #q_reliability = (1.0 - (2.0/3.0) * q_reliability)
@@ -77,9 +88,9 @@ def main():
         #b1,b2,b3=7,9,20
 
         # [[72,12,6]]
-        ell,m = 6,6
-        a1,a2,a3=3,1,2
-        b1,b2,b3=3,1,2
+        #ell,m = 6,6
+        #a1,a2,a3=3,1,2
+        #b1,b2,b3=3,1,2
 
 
         # Ted's code [[90,8,10]]
@@ -113,18 +124,17 @@ def main():
         print(B_x_pows,B_y_pows)
 
         code, A_list, B_list = create_bivariate_bicycle_codes(ell, m, A_x_pows, A_y_pows, B_x_pows, B_y_pows)
-        #pcm = sparse.csc_matrix(code.hx, dtype=np.uint8)    
-        #pcm = sparse(code.hx, dtype=np.uint8)    
-        
+        pcm = sparse.csc_matrix(code.hx, dtype=np.uint8)    
+                
         # Code distance
         d = 12
-        num_iterations = 100
+        num_iterations = 1000
      
 
         # {3: []}
-        PlsBPOSD_lib[codeConfig] = []
+        PlsBP[codeConfig] = []
         PlsBPOSD[codeConfig] = []
-        times_BPOSD_lib[codeConfig] = []
+        times_BP[codeConfig] = []
         times_BPOSD[codeConfig] = []
        
 
@@ -165,11 +175,9 @@ def main():
             # IT IS NOT THE DECODING PROCESS!!!! JUST THE DEFINITION OF THE DECODING PARAMETERS
             # For more information about the parameters and the possible values you can visit:
             # https://software.roffe.eu/ldpc/quantum_decoder.html           
-            print(channel_probs)   
-            _osd = OSD_decoder.OSD_decoder(pcm.toarray())
-
-            # LIB
-            _bposd = BpOsdDecoder(pcm, max_iter=100, error_rate=float(p), bp_method="minimum_sum", channel_probs=matrices.priors, ms_scaling_factor=1.0, schedule = 'parallel', osd_method="osd_0")
+            print(channel_probs)    
+            _bp = BpDecoder(pcm, max_iter=num_iterations, bp_method="minimum_sum", channel_probs=matrices.priors,ms_scaling_factor=1.0)
+            #_bposd = BpOsdDecoder(pcm, max_iter=100, error_rate=float(p), bp_method="minimum_sum", schedule = 'parallel', osd_method="osd_0")
 
             #-------------Código adicional para probar la librería------------
             L_flat = pcm.astype(np.double).copy()
@@ -181,15 +189,12 @@ def main():
                 for i in range(pcm.shape[0]):
                     if L_flat[i, j] == 1.0:
                         L_flat[i, j] = 0#np.log((1 - channel_probs[j])/channel_probs[j])
-
+            
             
             # Initialize variables for tracking performance
-            PlBPOSD_lib, PlBPOSD = 0, 0
-            time_av_BPOSD_lib, time_max_BPOSD_lib = 0, 0
+            PlBP, PlBPOSD = 0, 0
+            time_av_BP, time_max_BP = 0, 0
             time_av_BPOSD, time_max_BPOSD = 0, 0
-            nOSD_lib, nOSD = 0,0
-            dist_LLR = 0
-            eq_LLR = 0
             
             #convert L_flat and pcm to flat vectors and np arrays
             #pcm_dense = pcm.astype(np.int32).toarray()
@@ -197,14 +202,10 @@ def main():
             #L_dense = L_flat.astype(np.double).toarray()
             #L_flat = np.ascontiguousarray(L_dense.ravel(),dtype=np.double)
             #-------------------------------------------------------------------
-            # EN OBJETO sm ESTÁN LOS LLR DEL TIRÓN
+
             #sm = init_sparse_matrix_t(L_flat,pcm_flat)
-            pcm_csc = pcm.tocsc()
-
-            L_values = np.zeros(pcm_csc.nnz, np.float64)
-            # Pasar la matriz convertida
-            sm = init_sparse_matrix_from_csc(pcm_csc, L_values) 
-
+            L_values = np.zeros(pcm.nnz,np.float64)
+            sm = init_sparse_matrix_from_csc(pcm,L_values)
 
             # Start the Montecarlo simulations
             for iteration in range(NMCs[index]):
@@ -220,70 +221,56 @@ def main():
                 # Decoders: We receive the detectors from the quantum processor and we predict the error with the decoder
                 # For more information about BP (min-sum) and OSD you can start reading: https://ieeexplore.ieee.org/document/9562513
                 
-
-                # ***********************************************************************************************************************************
-                # Decoding with BP+OSD and measuring times
-                error_computed = np.zeros(pcm.shape[1],dtype=np.int32)
-
+                # Decoding with BP and measuring times
                 a = time.time()  
                 #print("detectors shape:", detectors[0] )
-                L_array = compute_min_sum_wrapper(sm, np.ascontiguousarray(detectors[0], dtype=np.int32), pcm.shape[0], pcm.shape[1], np.ascontiguousarray(Lj, dtype=np.double), alpha, num_iterations + 1, error_computed)
-
+                predicted_errors_bp = _bp.decode(detectors[0])
                 #print(predicted_errors_bp.shape)
-
-                if np.any(np.equal((pcm @ error_computed.T) % 2, detectors[0])): # BP NO CONVERGE, debe entrar OSD para intentar corregir (Criterio convergencia: H*e^t=S)
-                    nOSD +=1
-
-                    error_computed = _osd.decode(np.ascontiguousarray(detectors[0], dtype=np.int32), np.ascontiguousarray(L_array[2], dtype=np.double)) # OJO!! Mirar si Lj cambia 
-
+    
                 b = time.time() 
-                time_av_BPOSD += (b - a) / NMCs[index]  
-                times_BPOSD[codeConfig].append(b-a)
-                time_max_BPOSD = max(time_max_BPOSD, (b - a)) 
-
-                # ***********************************************************************************************************************************
-                # Decoding with BPOSD_lib and measuring times    
-              
+                time_av_BP += (b - a) / NMCs[index]  
+                times_BP[codeConfig].append(b-a)
+                time_max_BP = max(time_max_BP, (b - a))  
+                
+                # Decoding with BPOSD and measuring times    
+                error_computed = np.zeros(pcm.shape[1],dtype=np.int32)
+                final_llr = np.zeros(pcm.shape[1], dtype=np.double)
+                
                 a = time.time()
-                error_computed_lib = _bposd.decode(detectors[0])
-
-                if (_bposd.converge):
-                    nOSD_lib += 1
-
-                if np.any(np.equal(np.ascontiguousarray(L_array[2], dtype=np.double), _bposd.log_prob_ratios)):
-                    dist_LLR += 1
-
-                    if np.any(np.equal(np.ascontiguousarray(L_array[2], dtype=np.double), np.ascontiguousarray(Lj, dtype=np.double))):
-                        eq_LLR += 1
-
+                #predicted_errors_osd = _bposd.decode(detectors[0])
+                L_array = compute_min_sum_wrapper(sm, detectors[0].astype(np.int32), pcm.shape[0], pcm.shape[1],
+                                                    Lj.astype(np.double), alpha, num_iterations + 1, error_computed, final_llr)
+                
+               
+                values_csr = L_array[0].values_csr
+                #print("values_csr\n", values_csr)
                 b = time.time()
-                time_av_BPOSD_lib += (b - a) / NMCs[index]
-                times_BPOSD_lib[codeConfig].append(b-a)
-                time_max_BPOSD_lib = max(time_max_BPOSD_lib, (b - a))  
+                time_av_BPOSD += (b - a) / NMCs[index]
+                times_BPOSD[codeConfig].append(b-a)
+                time_max_BPOSD = max(time_max_BPOSD, (b - a))  
                 
                 # Compute the logical error rate. First, we multiply the physical errors that were predicted (predicted_errors) by the observable matrix to get the logical state
                 # Then you compare the logical state obtained with your prediction with the real one (observables)
                
-                logical_error_osd_lib = (observable_mat@error_computed_lib+observables) % 2
-                logical_error_osd     = (observable_mat@error_computed+observables) % 2
+                logical_error = (observable_mat@predicted_errors_bp+observables) % 2 # para comparar suma la matriz de errores predicha, que debería dar 0 con el mod 2
+                logical_error_osd = (observable_mat@error_computed+observables) % 2
 
                 # If just one of the logical qubits has an error, the whole decoding is considered a failure
-                if np.any(logical_error_osd_lib == 1):
-                    PlBPOSD_lib += 1/NMCs[index]
+                if np.any(logical_error == 1):
+                    PlBP += 1/NMCs[index]
                 if np.any(logical_error_osd == 1):
                     PlBPOSD += 1/NMCs[index]  
                 
                 
             # Store results
-            PlsBPOSD_lib[codeConfig].append(PlBPOSD_lib)
+            PlsBP[codeConfig].append(PlBP)
             PlsBPOSD[codeConfig].append(PlBPOSD)
             
             # You can verify the performance by comparing it with the one here (Fig.6 for the 72 code) https://arxiv.org/pdf/2504.01164
             print(f'Physical error: {p}')
-            print(f'Logical error BP+OSD (lib): {PlBPOSD_lib/d} ({nOSD_lib} OSD actions) with average time {time_av_BPOSD_lib} and max time {time_max_BPOSD_lib}')
-            print(f'Logical error BP+OSD      : {PlBPOSD/d} ({nOSD_lib} OSD actions) with average time {time_av_BPOSD} and max time {time_max_BPOSD}')
-            print(f'Different LLRs {dist_LLR} times & it does not change in {eq_LLR} epochs')
-            #print(f'Time improvement: {(( time_av_BPOSD_lib - time_av_BPOSD)/ time_av_BPOSD_lib) * 100} raw time improvement: {time_av_BPOSD_lib - time_av_BPOSD}')
+            print(f'Logical error BP: {PlBP/d} with average time {time_av_BP} and max time {time_max_BP}')
+            print(f'Error Wrapper_min_sum: {PlBPOSD/d} with average time {time_av_BPOSD} and max time {time_max_BPOSD}')
+            print(f'Time improvement: {(( time_av_BP - time_av_BPOSD)/ time_av_BP) * 100} raw time improvement: {time_av_BP - time_av_BPOSD}')
             print(f'-------------------------------------------------')
 
 
@@ -291,7 +278,7 @@ def main():
     plt.figure(figsize=(8,6))
 
     for codeConfig in codesConfig:
-        plt.plot(ps, PlsBPOSD_lib[codeConfig], marker="o", label=f"BP {codeConfig}")
+        plt.plot(ps, PlsBP[codeConfig], marker="o", label=f"BP {codeConfig}")
         plt.plot(ps, PlsBPOSD[codeConfig], marker="s", label=f"Min-Sum Wrapper {codeConfig}")
 
     plt.yscale("log")   # eje Y logarítmico
@@ -308,4 +295,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 

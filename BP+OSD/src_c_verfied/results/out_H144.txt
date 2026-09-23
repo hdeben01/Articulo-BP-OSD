@@ -1,0 +1,47 @@
+[0.0009, 0.001, 0.002, 0.003, 0.004, 0.005]
+[3] [1, 2]
+[1, 2] [3]
+Code: 144
+-------------------------------------------------
+parity check matrix (936, 8784)
+[0.00173826 0.00173826 0.00209698 ... 0.00095954 0.00095954 0.00095954]
+L_flat shape (936, 8784)
+Physical error: 0.0009
+Logical error BP+OSD (lib): 0.0 (0 logical errors/ 10 OSD activations) with average time 0.002092242121696464 and max time 0.02374124526977539
+Logical error BP+OSD      : 0.0 (0 logical errors / 4193 OSD activations) with average time 0.011271752142906228 and max time 0.04613351821899414
+-------------------------------------------------
+parity check matrix (936, 8784)
+[0.00193118 0.00193118 0.0023296  ... 0.0010661  0.0010661  0.0010661 ]
+L_flat shape (936, 8784)
+Physical error: 0.001
+Logical error BP+OSD (lib): 0.0 (0 logical errors/ 22 OSD activations) with average time 0.002378762030601503 and max time 0.026871919631958008
+Logical error BP+OSD      : 0.0 (0 logical errors / 4643 OSD activations) with average time 0.012593435025215155 and max time 0.045845746994018555
+-------------------------------------------------
+parity check matrix (936, 8784)
+[0.00385807 0.00385807 0.00465175 ... 0.00213106 0.00213106 0.00213106]
+L_flat shape (936, 8784)
+Physical error: 0.002
+Logical error BP+OSD (lib): 1.6666666666666667e-05 (2 logical errors/ 195 OSD activations) with average time 0.004854864144325264 and max time 0.03212451934814453
+Logical error BP+OSD      : 8.333333333333334e-06 (1 logical errors / 8603 OSD activations) with average time 0.023308325099945012 and max time 0.0482938289642334
+-------------------------------------------------
+parity check matrix (936, 8784)
+[0.00578065 0.00578065 0.00696646 ... 0.00319488 0.00319488 0.00319488]
+L_flat shape (936, 8784)
+Physical error: 0.003
+Logical error BP+OSD (lib): 0.00021666666666666663 (26 logical errors/ 840 OSD activations) with average time 0.008222922849655128 and max time 0.12175202369689941
+Logical error BP+OSD      : 0.0002499999999999999 (30 logical errors / 9768 OSD activations) with average time 0.027940246081352163 and max time 0.05214285850524902
+-------------------------------------------------
+parity check matrix (936, 8784)
+[0.00769895 0.00769895 0.00927375 ... 0.00425756 0.00425756 0.00425756]
+L_flat shape (936, 8784)
+Physical error: 0.004
+Logical error BP+OSD (lib): 0.0019416666666666595 (233 logical errors/ 2405 OSD activations) with average time 0.013558342456817713 and max time 0.09649276733398438
+Logical error BP+OSD      : 0.0018166666666666602 (218 logical errors / 9974 OSD activations) with average time 0.030216697955131468 and max time 0.05184674263000488
+-------------------------------------------------
+parity check matrix (936, 8784)
+[0.00961295 0.00961295 0.01157362 ... 0.00531911 0.00531911 0.00531911]
+L_flat shape (936, 8784)
+Physical error: 0.005
+Logical error BP+OSD (lib): 0.008558333333333492 (1027 logical errors/ 4985 OSD activations) with average time 0.02102619342803957 and max time 0.17955541610717773
+Logical error BP+OSD      : 0.008825000000000168 (1059 logical errors / 9997 OSD activations) with average time 0.03293575928211223 and max time 0.05389761924743652
+-------------------------------------------------

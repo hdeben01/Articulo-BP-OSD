@@ -6,6 +6,16 @@ import matplotlib.pyplot as plt
 
 import sys
 import os
+
+# Añadir la carpeta padre al path
+# Obtener la ruta absoluta del directorio actual (src/)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Subir un nivel para llegar a la carpeta donde está el .so
+parent_dir = os.path.dirname(current_dir)
+# Añadir la carpeta del .so al path de Python
+sys.path.append(parent_dir)
+from wrapper_csc import compute_min_sum_wrapper,SparseMatrixWrapper,init_sparse_matrix_t, init_sparse_matrix_from_csc
+
 from OSD_lib import OSD_decoder
 
 import numpy as np  
@@ -21,15 +31,16 @@ def main():
     show_prints = False
     
     # List of codes to test in this example is the [[72, 12 ,6]] from https://www.nature.com/articles/s41586-024-07107-7
-    codesConfig = ["72"]
+    codesConfig = ["90"]
     
+
+    # Physical error rate that is simulated    
+    #ps = np.linspace(0.001, 0.005, num=5) 
+    ps = [0.0009, 0.001, 0.002, 0.003, 0.004, 0.005] 
+
     # Number of Monte Carlo trials for physical error rates
-    exp = 3
-    NMCs = [10**exp, 10**exp, 10**exp, 10**exp, 10**exp]  
-    
-    # Physical error rate that is simulated
-    
-    ps = np.linspace(0.001, 0.005, num=5)  
+    exp = 4
+    NMCs = [10**exp] * len(ps)
     
     print(ps)
     
@@ -72,15 +83,15 @@ def main():
         #b1,b2,b3=7,9,20
 
         # [[72,12,6]]
-        ell,m = 6,6
-        a1,a2,a3=3,1,2
-        b1,b2,b3=3,1,2
+        #ell,m = 6,6
+        #a1,a2,a3=3,1,2
+        #b1,b2,b3=3,1,2
 
 
         # Ted's code [[90,8,10]]  !!!
-        #ell,m = 15,3
-        #a1,a2,a3 = 9,1,2
-        #b1,b2,b3 = 0,2,7
+        ell,m = 15,3
+        a1,a2,a3 = 9,1,2
+        b1,b2,b3 = 0,2,7
 
         # [[108,8,10]]
         #ell,m = 9,6
@@ -112,7 +123,7 @@ def main():
         #pcm = sparse(code.hx, dtype=np.uint8)    
         
         # Code distance
-        d = 12
+        d = 10
         num_iterations = 100
      
 
@@ -161,22 +172,21 @@ def main():
             # For more information about the parameters and the possible values you can visit:
             # https://software.roffe.eu/ldpc/quantum_decoder.html           
             print(channel_probs)    
-            _bp = BpDecoder(pcm, max_iter=100, error_rate=float(p), bp_method="minimum_sum", channel_probs=matrices.priors, ms_scaling_factor=1.0, schedule = 'parallel')
-            _osd = OSD_decoder.OSD_decoder(pcm.toarray())
+            _osd = OSD_decoder.OSD_decoder_opt(pcm.toarray().T)
 
             # LIB
-            _bposd = BpOsdDecoder(pcm, max_iter=100, error_rate=float(p), bp_method="minimum_sum", channel_probs=matrices.priors, ms_scaling_factor=1.0, schedule = 'parallel', osd_method="osd_0")
+            _bposd = BpOsdDecoder(pcm, max_iter=num_iterations, error_rate=float(p), bp_method="minimum_sum", channel_probs=matrices.priors, ms_scaling_factor=alpha, schedule = 'parallel', osd_method="osd_0")
 
             #-------------Código adicional para probar la librería------------
-            #L_flat = pcm.astype(np.double).copy()
-            #print("L_flat shape", L_flat.shape)
+            L_flat = pcm.astype(np.double).copy()
+            print("L_flat shape", L_flat.shape)
             #L_flat = np.ascontiguousarray(L_flat)
-            #Lj = np.log((1 - channel_probs)/channel_probs)
+            Lj = np.log((1 - channel_probs)/channel_probs)
             #build the first beliefs with the channel probabilities
-            #for j in range(pcm.shape[1]):
-            #    for i in range(pcm.shape[0]):
-            #        if L_flat[i, j] == 1.0:
-            #            L_flat[i, j] = 0#np.log((1 - channel_probs[j])/channel_probs[j])
+            for j in range(pcm.shape[1]):
+                for i in range(pcm.shape[0]):
+                    if L_flat[i, j] == 1.0:
+                        L_flat[i, j] = 0#np.log((1 - channel_probs[j])/channel_probs[j])
             
             
             # Initialize variables for tracking performance
@@ -184,6 +194,8 @@ def main():
             time_av_BPOSD_lib, time_max_BPOSD_lib = 0, 0
             time_av_BPOSD, time_max_BPOSD = 0, 0
             Pl_lib, Pl = 0, 0
+            nOSD_lib, nOSD = 0, 0
+            
             
             #convert L_flat and pcm to flat vectors and np arrays
             #pcm_dense = pcm.astype(np.int32).toarray()
@@ -193,8 +205,8 @@ def main():
             #-------------------------------------------------------------------
             # EN OBJETO sm ESTÁN LOS LLR DEL TIRÓN
             #sm = init_sparse_matrix_t(L_flat,pcm_flat)
-            #L_values = np.zeros(pcm.nnz,np.float64)
-            #sm = init_sparse_matrix_from_csc(pcm,L_values)  
+            L_values = np.zeros(pcm.nnz,np.float64)
+            sm = init_sparse_matrix_from_csc(pcm,L_values) 
 
             # Start the Montecarlo simulations
             for iteration in range(NMCs[index]):
@@ -203,7 +215,7 @@ def main():
                 sampler = circuit.compile_detector_sampler()
                 num_shots = 1
                 
-                # Assuming this quantum noise obtain the detectors that we read from the quantum computer and store the logical state + the error (observables)
+                # Assuming this quantum noise obtain the detectors that we read from the quantum computer and store the logical state + the error (observablesclea)
                 # The logical state + the error is only available in simulation, where we can "measure the noise", but not in the real setup
                 detectors, observables = sampler.sample(num_shots, separate_observables=True)
                 
@@ -214,16 +226,18 @@ def main():
                 # ***********************************************************************************************************************************
                 # Decoding with BP+OSD and measuring times
                 error_computed = np.zeros(pcm.shape[1],dtype=np.int32)
-
-                #print("detectors shape:", detectors[0] )
-                predicted_errors_bp = _bp.decode(detectors[0])
-                #print(predicted_errors_bp.shape)
+                final_llr = np.zeros(pcm.shape[1],dtype=np.double)
 
                 a = time.time()  
-                if _bp.converge == False: # BP NO CONVERGE, debe entrar OSD para intentar corregir
-                    error_computed = _osd.decode(detectors[0], _bp.log_prob_ratios)
-                else:
-                    error_computed = predicted_errors_bp
+
+                L_array = compute_min_sum_wrapper(sm, detectors[0].astype(np.int32), pcm.shape[0], pcm.shape[1],
+                                                    Lj.astype(np.double), alpha, num_iterations + 1, error_computed, final_llr)
+
+                if(not(np.equal(pcm @error_computed.T, detectors[0]) % 2).all()): 
+                    nOSD += 1 
+
+                    error_computed = _osd.decode(detectors[0].astype(np.int32), final_llr.astype(np.double))
+
                 b = time.time() 
                 time_av_BPOSD += (b - a) / NMCs[index]  
                 times_BPOSD[codeConfig].append(b-a)
@@ -234,6 +248,10 @@ def main():
               
                 a = time.time()
                 error_computed_lib = _bposd.decode(detectors[0])
+
+                if not(_bposd.converge):
+                    nOSD_lib += 1
+
                 b = time.time()
                 time_av_BPOSD_lib += (b - a) / NMCs[index]
                 times_BPOSD_lib[codeConfig].append(b-a)
@@ -260,8 +278,8 @@ def main():
             
             # You can verify the performance by comparing it with the one here (Fig.6 for the 72 code) https://arxiv.org/pdf/2504.01164
             print(f'Physical error: {p}')
-            print(f'Logical error BP+OSD (lib): {PlBPOSD_lib/d} ({Pl_lib} logical errors) with average time {time_av_BPOSD_lib} and max time {time_max_BPOSD_lib}')
-            print(f'Logical error BP+OSD      : {PlBPOSD/d} ({Pl_lib} logical errors) with average time {time_av_BPOSD} and max time {time_max_BPOSD}')
+            print(f'Logical error BP+OSD (lib): {PlBPOSD_lib/d} ({Pl_lib} logical errors/ {nOSD_lib} OSD activations) with average time {time_av_BPOSD_lib} and max time {time_max_BPOSD_lib}')
+            print(f'Logical error BP+OSD      : {PlBPOSD/d} ({Pl} logical errors / {nOSD} OSD activations) with average time {time_av_BPOSD} and max time {time_max_BPOSD}')
             print(f'-------------------------------------------------')
 
 
@@ -282,8 +300,9 @@ def main():
     plt.tight_layout()
 
     # Guardar en PNG
-    plt.savefig("logical_vs_physical_v1_72_1k.png", dpi=300)
+    plt.savefig(f"logical_vs_physical_v2_{codesConfig[0]}_{(10**exp) / 1000}k_alpha{alpha:.2f}".replace(".", "") + ".png", dpi=300)
 
 if __name__ == "__main__":
     main()
+
 
